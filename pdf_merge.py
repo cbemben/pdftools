@@ -20,9 +20,9 @@ class PdfMerge:
         self._obj = PyPDF2.PdfFileMerger()
 
     def get_filename(self):
-    """Filename handling based on the class inputs. Joins the target directory with
-    the filename and coerces to a PurePath object and attached pdf file extension.
-    """
+        """Filename handling based on the class inputs. Joins the target directory with
+        the filename and coerces to a PurePath object and attached pdf file extension.
+        """
         filename = self._target_filename + '.pdf'
         target_dir = PurePath(self._target_dir)
         filepath = PurePath(target_dir).joinpath(filename)
@@ -40,5 +40,6 @@ class PdfMerge:
 
 if __name__=='__main__':
     test_dir = '/Users/FBIMAC/projectrepos/pdftools/files'
-    PM = PdfMerge(source_dir=test_dir, target_dir=test_dir, target_filename='merged')
-    #PM.get_pdf_files_from_dir()
+    filename = input("what should the filename be?:\n")
+    PM = PdfMerge(source_dir=test_dir, target_dir=test_dir, target_filename=filename)
+    PM.merge_pdf_files_from_dir()
