@@ -18,11 +18,11 @@ class PdfMerge:
 
     def get_pdf_files_from_dir(self):
         #pull pdf files from the target directory
-        #pdfList=[pdf for pdf in os.listdir(self._source_dir) if pdf.endswith(".pdf")]
+        outfile = str(self.get_filename())
         for fil in Path(self._source_dir).glob('*.pdf'):
             fil = str(fil)
             self._obj.append(PyPDF2.PdfFileReader(fil, 'rb'))
-        self._obj.write(str(self.get_filename()))
+        self._obj.write(outfile)
 
     #read in pdf files
     #pdf_obj = PyPDF2.PdfFileReader(stream='files/iris8.pdf')
