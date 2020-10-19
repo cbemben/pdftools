@@ -1,19 +1,28 @@
-import PyPDF2
-import pathlib
 import os
+import PyPDF2
+
+from pathlib import PurePath, Path
 
 class PdfMerge:
-    def __init__(self, source_dir: str, target_dir: os.PathLike, target_filename: os.PathLike):
+    def __init__(self, source_dir: str, target_dir: str, target_filename: os.PathLike):
         self._source_dir = source_dir
         self._target_dir = target_dir
+        self._target_filename = target_filename
+        self._obj = PyPDF2.PdfFileMerger()
+
+    def get_filename(self):
+        filename = self._target_filename + '.pdf'
+        target_dir = PurePath(self._target_dir)
+        filepath = PurePath(target_dir).joinpath(filename)
+        return filepath
 
     def get_pdf_files_from_dir(self):
         #pull pdf files from the target directory
-        pdfList=[pdf for pdf in os.listdir(self._source_dir) if pdf.endswith(".pdf")]
-        for fil in pdfList:
-            obj.append(PdfFileReader(fil, 'rb')) 
-            obj.write("Merged.pdf")
-        return
+        #pdfList=[pdf for pdf in os.listdir(self._source_dir) if pdf.endswith(".pdf")]
+        for fil in Path(self._source_dir).glob('*.pdf'):
+            fil = str(fil)
+            self._obj.append(PyPDF2.PdfFileReader(fil, 'rb'))
+            self._obj.write(str(self.get_filename()))
 
     #read in pdf files
     #pdf_obj = PyPDF2.PdfFileReader(stream='files/iris8.pdf')
