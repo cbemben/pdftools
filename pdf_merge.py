@@ -28,3 +28,4 @@ class PdfMerge:
 if __name__=='__main__':
     test_dir = '/Users/FBIMAC/projectrepos/pdftools/files'
     PM = PdfMerge(source_dir=test_dir, target_dir=test_dir, target_filename='merged')
+    #PM.get_pdf_files_from_dir()
