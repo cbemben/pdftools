@@ -22,7 +22,7 @@ class PdfMerge:
         for fil in Path(self._source_dir).glob('*.pdf'):
             fil = str(fil)
             self._obj.append(PyPDF2.PdfFileReader(fil, 'rb'))
-            self._obj.write(str(self.get_filename()))
+        self._obj.write(str(self.get_filename()))
 
     #read in pdf files
     #pdf_obj = PyPDF2.PdfFileReader(stream='files/iris8.pdf')
